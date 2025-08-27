@@ -6,7 +6,9 @@ RUN apt-get update \
         wget \
         curl \
         tar \
-        git
+        git \
+        make \
+        gcc
 
 # STAR for genome indexing
 RUN wget -P /opt https://github.com/alexdobin/STAR/archive/2.7.1a.tar.gz && \
@@ -16,6 +18,10 @@ RUN wget -P /opt https://github.com/alexdobin/STAR/archive/2.7.1a.tar.gz && \
 # Fastp for trimming
 RUN wget -P /opt http://opengene.org/fastp/fastp && \
     chmod a+x /opt/fastp
+
+# BWA for indexing
+RUN git clone https://github.com/lh3/bwa.git /opt/bwa && \
+    cd bwa; make
 
 # Install python dependencies
 RUN pip install --no-cache-dir \
