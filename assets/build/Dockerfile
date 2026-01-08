@@ -21,7 +21,7 @@ RUN wget -P /opt http://opengene.org/fastp/fastp && \
 
 # BWA for indexing
 RUN git clone https://github.com/lh3/bwa.git /opt/bwa && \
-    cd bwa; make
+    cd /opt/bwa && make
 
 # Install python dependencies
 RUN pip install --no-cache-dir \
@@ -30,7 +30,8 @@ RUN pip install --no-cache-dir \
     ruff \
     nbformat \
     ipywidgets \
-    tqdm
+    tqdm \
+    pysam
 
 # Docker NCCL configuration
 ENV NCCL_SOCKET_IFNAME=^docker0,lo
